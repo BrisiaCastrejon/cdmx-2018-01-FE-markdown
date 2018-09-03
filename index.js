@@ -22,12 +22,12 @@ const path = require('path');
        //getLinks(err, lines);
     };
 };*/
-const getLinks = (err, md) => {
+const getLinks = (err, str) => {
     if (err) {
         console.log(err.message);
     } else {
         const search = /((\bhttps?:\/\/)|(\bhttp:\/\/)|(\bwww\.))\S*/g;
-        const links = md.match(search);
+        const links = str.match(search);
         for (let i = 0; i < links.length; i++) {
             const cutLink = links[i].split(')');
             const result = cutLink[0];
@@ -36,23 +36,23 @@ const getLinks = (err, md) => {
     }
 };
 
-const getLines = (err, md) => {
+const getLines = (err, str) => {
     if (err) {
         console.log(err.message);
     } else {
-        const lines = md.split('\n').length;
+        const lines = str.split('\n').length;
         console.log(lines);
         //getLinks(err, lines);
     };
 };
 
 const readDocument = (readmeMd, getLines, getLinks) => {
-    fs.readFile(readmeMd, 'utf-8', getFile = (err, md) => {
+    fs.readFile(readmeMd, 'utf-8', getFile = (err, str) => {
         if (err) {
             console.log(err.message);
         } else {
-            getLines(err, md);
-            getLinks(err, md);
+            getLines(err, str);
+            getLinks(err, str);
         };
     });
 };
