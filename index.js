@@ -2,8 +2,12 @@
 
 const fs = require("fs");
 const readmeMd = './README.md';
+const fetch = require('node-fetch');
 const path = require('path');
 
+const pruebaPath = (file) => {
+    
+} 
 /* const getLinks = (err, lines) => {
     if (err) {
         console.log(err.message);
@@ -22,6 +26,22 @@ const path = require('path');
        //getLinks(err, lines);
     };
 };*/
+const printResults = (res) => {
+
+    const allResponse = {
+        // page: res.url,
+        pageStatus: res.status,
+        pageMessage: res.statusText
+    }
+    console.log(allResponse);
+};
+const getResponse = (result) => {
+    // console.log(result);
+    fetch(result).then((res) => {
+        // console.log(res);
+        printResults(res);
+    })
+}
 const getLinks = (err, str) => {
     if (err) {
         console.log(err.message);
@@ -31,7 +51,8 @@ const getLinks = (err, str) => {
         for (let i = 0; i < links.length; i++) {
             const cutLink = links[i].split(')');
             const result = cutLink[0];
-            console.log(result);
+            // console.log(result);
+            getResponse(result);
         }
     }
 };
@@ -41,7 +62,7 @@ const getLines = (err, str) => {
         console.log(err.message);
     } else {
         const lines = str.split('\n').length;
-        console.log(lines);
+        // console.log(lines);
         //getLinks(err, lines);
     };
 };
@@ -58,4 +79,6 @@ const readDocument = (readmeMd, getLines, getLinks) => {
 };
 readDocument(readmeMd, getLines, getLinks);
 
-module.exports = {readDocument};
+module.exports = {
+    readDocument
+};
