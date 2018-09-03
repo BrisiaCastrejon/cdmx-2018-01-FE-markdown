@@ -21,5 +21,8 @@
   "homepage": "https://github.com/BrisiaCastrejon/cdmx-2018-01-FE-markdown#readme",
   "devDependencies": {
     "jest": "^23.5.0"
+  },
+  "dependencies": {
+    "eslint": "^5.5.0"
   }
 }
