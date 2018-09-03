@@ -8,12 +8,12 @@ const path = require('path');
         }else {
             const search = /((\bhttps?:\/\/)|(\bhttp:\/\/)|(\bwww\.))\S*/g;
             const links = md.match(search);   
-         for (let i = 0; i < links.length; i++) {
+         for (let i = 0; i < links.length; i++) {             
             const cutLink = links[i].split(')');
+            // console.log(cutLink);
             const result = cutLink[0];
-            console.log(result);             
-         } /* for (const key in links) {
-             const element = links[key];
-             console.log(element)
-            } */}
+            // console.log(typeof(result));
+            console.log(result);               
+         }
+        }
     }) 
