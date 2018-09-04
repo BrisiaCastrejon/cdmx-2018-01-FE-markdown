@@ -1,6 +1,7 @@
 const fs = require("fs");
 const readmeMd = './README.md';
 const fetch = require('node-fetch');
+const colors = require('colors');
 // const path = require('path');
 
 // const pruebaPath = (doc) => {
@@ -22,7 +23,7 @@ const printResults = (res) => {
         pageStatus: res.status,
         pageMessage: res.statusText
     };
-    console.log(allResponse);
+      console.log("LinkCheck:".cyan +' '+ allResponse.page +' '+ "Status:".yellow +' '+ allResponse.pageStatus + ' ' + "networkMessage:".magenta +' '+ allResponse.pageMessage);
 };
 const getResponse = (result) => {
     // console.log(result);
@@ -56,7 +57,7 @@ const getLines = (err, str) => {
     };
 };
 
-const readDocument = (readmeMd, getLines, getLinks) => {
+const mdLinks = (readmeMd) => {
     fs.readFile(readmeMd, 'utf-8', getFile = (err, str) => {
         if (err) {
             console.log(err.message);
@@ -66,6 +67,6 @@ const readDocument = (readmeMd, getLines, getLinks) => {
         };
     });
 };
-readDocument(readmeMd, getLines, getLinks);
+mdLinks(readmeMd);
 
-module.exports = {readDocument};
+module.exports = {mdLinks};
