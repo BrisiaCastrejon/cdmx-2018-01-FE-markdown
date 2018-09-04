@@ -1,22 +1,11 @@
-#!/usr/bin/env node
-
 const fs = require("fs");
 const readmeMd = './README.md';
 const fetch = require('node-fetch');
-const path = require('path');
+// const path = require('path');
 
-const pruebaPath = (doc) => {
+// const pruebaPath = (doc) => {
 
-};
-/* const getLinks = (err, lines) => {
-    if (err) {
-        console.log(err.message);
-    } else {
-        console.log(lines);
-
-    }
-}; */
-
+// };
 /* const getLines = (err, md) => {
     if (err) {
         console.log(err.message);
@@ -29,7 +18,7 @@ const pruebaPath = (doc) => {
 const printResults = (res) => {
 
     const allResponse = {
-        // page: res.url,
+        page: res.url,
         pageStatus: res.status,
         pageMessage: res.statusText
     };
@@ -79,6 +68,4 @@ const readDocument = (readmeMd, getLines, getLinks) => {
 };
 readDocument(readmeMd, getLines, getLinks);
 
-module.exports = {
-    readDocument
-};
+module.exports = {readDocument};
