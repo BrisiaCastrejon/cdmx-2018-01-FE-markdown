@@ -5,9 +5,9 @@ const readmeMd = './README.md';
 const fetch = require('node-fetch');
 const path = require('path');
 
-const pruebaPath = (file) => {
-    
-} 
+const pruebaPath = (doc) => {
+
+};
 /* const getLinks = (err, lines) => {
     if (err) {
         console.log(err.message);
@@ -32,7 +32,7 @@ const printResults = (res) => {
         // page: res.url,
         pageStatus: res.status,
         pageMessage: res.statusText
-    }
+    };
     console.log(allResponse);
 };
 const getResponse = (result) => {
@@ -40,8 +40,8 @@ const getResponse = (result) => {
     fetch(result).then((res) => {
         // console.log(res);
         printResults(res);
-    })
-}
+    });
+};
 const getLinks = (err, str) => {
     if (err) {
         console.log(err.message);
