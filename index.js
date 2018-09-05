@@ -2,8 +2,17 @@ const fs = require("fs");
 const readmeMd = './README.md';
 const fetch = require('node-fetch');
 const colors = require('colors');
-// const path = require('path');
+const path = require('path');
+// const pruebaRuta = ('C:/Users/TurnoAM/Documents/Laboratoria/Libreria/cdmx-2018-01-FE-markdown/test/md-links.spec.js')
 
+const resolveRoute = (file) => {
+    if (path.isAbsolute(file) === true) {
+        console.log(file);
+    } else {
+        console.log(path.resolve(file) + 'este es el path arreglado');    
+    };
+};
+resolveRoute(readmeMd);
 // const pruebaPath = (doc) => {
 
 // };
@@ -23,7 +32,7 @@ const printResults = (res) => {
         pageStatus: res.status,
         pageMessage: res.statusText
     };
-      console.log("LinkCheck:".cyan +' '+ allResponse.page +' '+ "Status:".yellow +' '+ allResponse.pageStatus + ' ' + "networkMessage:".magenta +' '+ allResponse.pageMessage);
+     console.log("LinkCheck:".cyan +' '+ allResponse.page +' '+ "Status:".yellow +' '+ allResponse.pageStatus + ' ' + "networkMessage:".magenta +' '+ allResponse.pageMessage);
 };
 const getResponse = (result) => {
     // console.log(result);
@@ -43,8 +52,8 @@ const getLinks = (err, str) => {
             const result = cutLink[0];
             // console.log(result);
             getResponse(result);
-        }
-    }
+        };
+    };
 };
 
 const getLines = (err, str) => {
