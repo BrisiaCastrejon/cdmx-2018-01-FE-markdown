@@ -5,17 +5,6 @@ const colors = require('colors');
 const path = require('path');
 // const pruebaRuta = ('C:/Users/TurnoAM/Documents/Laboratoria/Libreria/cdmx-2018-01-FE-markdown/test/md-links.spec.js')
 
-const resolveRoute = (file) => {
-    if (path.isAbsolute(file) === true) {
-        console.log(file);
-    } else {
-        console.log(path.resolve(file) + 'este es el path arreglado');    
-    };
-};
-resolveRoute(readmeMd);
-// const pruebaPath = (doc) => {
-
-// };
 /* const getLines = (err, md) => {
     if (err) {
         console.log(err.message);
@@ -25,6 +14,16 @@ resolveRoute(readmeMd);
        //getLinks(err, lines);
     };
 };*/
+
+const resolveRoute = (file) => {
+    if (path.isAbsolute(file) === true) {
+        console.log(file);
+    } else {
+        console.log(path.resolve(file) + 'este es el path arreglado');    
+    };
+};
+resolveRoute(readmeMd);
+
 const printResults = (res) => {
 
     const allResponse = {
