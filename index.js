@@ -2,7 +2,7 @@ const fs = require("fs");
 const readmeMd = './README.md';
 const fetch = require('node-fetch');
 const colors = require('colors');
-const path = require('path');
+// const path = require('path');
 // const pruebaRuta = ('C:/Users/TurnoAM/Documents/Laboratoria/Libreria/cdmx-2018-01-FE-markdown/test/md-links.spec.js')
 
 /* const getLines = (err, md) => {
@@ -15,14 +15,14 @@ const path = require('path');
     };
 };*/
 
-const resolveRoute = (file) => {
-    if (path.isAbsolute(file) === true) {
-        console.log(file);
-    } else {
-        console.log(path.resolve(file) + 'este es el path arreglado');    
-    };
-};
-resolveRoute(readmeMd);
+// const resolveRoute = (file) => {
+//     if (path.isAbsolute(file) === true) {
+//         console.log(file);
+//     } else {
+//         console.log(path.resolve(file) + 'este es el path arreglado');    
+//     };
+// };
+// resolveRoute(readmeMd);
 
 const printResults = (res) => {
 
@@ -40,41 +40,39 @@ const getResponse = (result) => {
         printResults(res);
     });
 };
+
 const getLinks = (err, str) => {
-    if (err) {
-        console.log(err.message);
-    } else {
+  return  new Promise((resolve, reject)=>{
+        if (err) return reject('No se obtuvieron los links');
         const search = /((\bhttps?:\/\/)|(\bhttp:\/\/)|(\bwww\.))\S*/g;
         const links = str.match(search);
         for (let i = 0; i < links.length; i++) {
             const cutLink = links[i].split(')');
             const result = cutLink[0];
             // console.log(result);
-            getResponse(result);
-        };
-    };
-};
-
-const getLines = (err, str) => {
-    if (err) {
-        console.log(err.message);
-    } else {
-        const lines = str.split('\n').length;
-        // console.log(lines);
-        //getLinks(err, lines);
-    };
-};
-
-const mdLinks = (readmeMd) => {
-    fs.readFile(readmeMd, 'utf-8', getFile = (err, str) => {
-        if (err) {
-            console.log(err.message);
-        } else {
-            getLines(err, str);
-            getLinks(err, str);
+            return resolve(result);           
         };
     });
 };
-mdLinks(readmeMd);
+
+
+const mdLinks = (readmeMd) => {
+  return new Promise((resolve, reject)=>{
+        fs.readFile(readmeMd, 'utf-8', getFile = (err, str) => {
+            if (err) return reject('Algo salio mal :( ');
+            // console.log(str);
+            return resolve(str);          
+        });
+    });  
+};
+mdLinks(readmeMd)
+.then(function (response) {
+    console.log(response);
+   // return valorLinks;
+// }).then((valorLinks)=>{
+//     console.log(valorLinks)
+ })
 
 module.exports = {mdLinks};
+
+//new Promise((resolve, reject)=>{})
