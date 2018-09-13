@@ -25,20 +25,28 @@ const colors = require('colors');
 // resolveRoute(readmeMd);
 
 const printResults = (res) => {
-
+    if (err){
+        console.log('no hay nada que mostrar');
+    } else{
     const allResponse = {
         page: res.url,
         pageStatus: res.status,
         pageMessage: res.statusText
     };
      console.log("LinkCheck:".cyan +' '+ allResponse.page +' '+ "Status:".yellow +' '+ allResponse.pageStatus + ' ' + "networkMessage:".magenta +' '+ allResponse.pageMessage);
+}
 };
 const getResponse = (result) => {
-    // console.log(result);
+    return new Promise((resolve, reject)=>{
+        if (err) return reject('No hay respuesta del servidor');
+        // console.log(result);
     fetch(result).then((res) => {
         // console.log(res);
-        printResults(res);
+        // printResults(res);
+        return resolve(res);
     });
+    })
+    // return getResponse;    
 };
 
 const getLinks = (err, str) => {
@@ -49,11 +57,12 @@ const getLinks = (err, str) => {
         for (let i = 0; i < links.length; i++) {
             const cutLink = links[i].split(')');
             const result = cutLink[0];
-            // console.log(result);
-            return resolve(result);           
+            // console.log(result);                       
         };
-    });
+        return resolve(result);
+    });    
 };
+getLinks();
 
 
 const mdLinks = (readmeMd) => {
@@ -61,18 +70,24 @@ const mdLinks = (readmeMd) => {
         fs.readFile(readmeMd, 'utf-8', getFile = (err, str) => {
             if (err) return reject('Algo salio mal :( ');
             // console.log(str);
+            // getLinks(err, str);
             return resolve(str);          
         });
     });  
 };
 mdLinks(readmeMd)
-.then(function (response) {
-    console.log(response);
-   // return valorLinks;
-// }).then((valorLinks)=>{
-//     console.log(valorLinks)
+.then(response => {
+    // console.log(response);
+    return getLinks;
+  })
+.then((result)=>{
+    console.log(result)
+     return getResponse;
  })
-
+.then((res) => {
+    console.log(res)
+     return printResults;
+ })
 module.exports = {mdLinks};
 
 //new Promise((resolve, reject)=>{})
